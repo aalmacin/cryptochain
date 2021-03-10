@@ -1,9 +1,9 @@
 {
-    "compilerOptions": {
-        "strict": true,
-        "alwaysStrict": true,
-        "noImplicitAny": false
-    },
-    "include": ["**/*.ts", "*.ts"],
-    "exclude": ["node_modules"],
+  "compilerOptions": {
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": false
+  },
+  "include": ["**/*.ts", "*.ts"],
+  "exclude": ["node_modules"]
 }
