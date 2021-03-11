@@ -1,9 +1,16 @@
+type BlockFields = {
+  timestamp: string;
+  lastHash: string;
+  hash: string;
+  data: string;
+};
+
 class Block {
-  private timestamp;
-  private lastHash;
-  private hash;
-  private data;
-  constructor({ timestamp, lastHash, hash, data }) {
+  private timestamp: BlockFields["timestamp"];
+  private lastHash: BlockFields["lastHash"];
+  private hash: BlockFields["hash"];
+  private data: BlockFields["data"];
+  constructor({ timestamp, lastHash, hash, data }: BlockFields) {
     this.timestamp = timestamp;
     this.lastHash = lastHash;
     this.hash = hash;
