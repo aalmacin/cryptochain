@@ -5,7 +5,7 @@ type BlockFields = {
   data: string;
 };
 
-class Block {
+export class Block {
   private timestamp: BlockFields["timestamp"];
   private lastHash: BlockFields["lastHash"];
   private hash: BlockFields["hash"];
@@ -17,11 +17,3 @@ class Block {
     this.data = data;
   }
 }
-
-const block1 = new Block({
-  timestamp: "01/01/01",
-  lastHash: "foo-lastHash",
-  hash: "foo-hash",
-  data: "foo-data",
-});
-console.log("block1", block1);
