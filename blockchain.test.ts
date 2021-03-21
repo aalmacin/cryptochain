@@ -2,10 +2,13 @@ import { Block } from "./block";
 import { BlockChain } from "./blockchain";
 
 describe("Blockchain", () => {
-  let blockchain: BlockChain;
+  let blockchain: BlockChain, newChain: BlockChain, originalChain: Block[];
 
   beforeEach(() => {
     blockchain = new BlockChain();
+    newChain = new BlockChain();
+
+    originalChain = blockchain.chain;
   });
 
   test("contains a `chain` Array instance", () => {
@@ -51,6 +54,42 @@ describe("Blockchain", () => {
       describe("and the chain does not contain any invalid blocks", () => {
         test("returns true", () => {
           expect(BlockChain.isValidChain(blockchain.chain)).toBe(true);
+        });
+      });
+    });
+  });
+
+  describe("replaceChain()", () => {
+    describe("when the new chain is not longer", () => {
+      test("does not replace the chain", () => {
+        newChain.chain[0] = ({ new: "chain" } as unknown) as Block;
+        blockchain.replaceChain(newChain.chain);
+        expect(blockchain.chain).toEqual(originalChain);
+      });
+    });
+
+    describe("when the new chain is longer", () => {
+      beforeEach(() => {
+        newChain.addBlock({ data: ["Bears"] });
+        newChain.addBlock({ data: ["Beets"] });
+        newChain.addBlock({ data: ["Battlestar Galactica"] });
+      });
+
+      describe("and the chain is invalid", () => {
+        test("does not replace the chain", () => {
+          newChain.chain[2].hash = "some-fake-hash";
+
+          blockchain.replaceChain(newChain.chain);
+
+          expect(blockchain.chain).toEqual(originalChain);
+        });
+      });
+
+      describe("and the chain is valid", () => {
+        test("replaces the chain", () => {
+          blockchain.replaceChain(newChain.chain);
+
+          expect(blockchain.chain).toEqual(newChain.chain);
         });
       });
     });
